@@ -29,7 +29,7 @@ public class AuthorSelect2 {
 
 		    // 3. SQL문 준비 / 바인딩 / 실행
 			String query = "";
-		    query +=" select author_id id, ";//컬럼명 정해줬을때
+		    query +=" select author_id, ";//컬럼명 정해줬을때
 		    query +="        author_name, ";
 		    query +="        author_desc ";
 		    query +=" from author ";

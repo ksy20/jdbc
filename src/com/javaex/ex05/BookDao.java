@@ -1,21 +1,29 @@
-package com.javaex.ex01;
+package com.javaex.ex05;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-public class AuthorSelect {
+public class BookDao {
 
-	public static void main(String[] args) {
+	//필드
+	
+	//생성자
+	public BookDao() {
+	}
+	
+	//메소드gs
+	
+	//메소드 일반
+	
+	//책 등록
+	public void bookInsert(String title, String pubs, String pubDate, int authorId) {
 		
 		// 0. import java.sql.*;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		//ResultSet rs = null;
 
 		try {
 		    // 1. JDBC 드라이버 (Oracle) 로딩
@@ -27,32 +35,27 @@ public class AuthorSelect {
 			System.out.println("접속 성공");
 
 		    // 3. SQL문 준비 / 바인딩 / 실행
+			//문자열
 			String query = "";
-		    query +=" select author_id id, ";//컬럼명 정해줬을때
-		    query +="        author_name, ";
-		    query +="        author_desc ";
-		    query +=" from author ";
-		    System.out.println(query);
-		    
-		    //문자열 쿼리문
-		    pstmt = conn.prepareStatement(query);
-		    
-		    //바인딩 생략(넣어줄 값없으니까)
-
-		    rs = pstmt.executeQuery();
+			
+			query +=" INSERT INTO book ";
+			query +=" VALUES (SEQ_BOOK_ID.nextval, ?,?,?,?) ";
+			System.out.println(query);
+			
+			//문자열 쿼리문
+			pstmt = conn.prepareStatement(query);
+			
+			//바인딩
+			pstmt.setString(1, title);
+			pstmt.setString(2, pubs);
+			pstmt.setString(3, pubDate);
+			pstmt.setInt(4, authorId);
+			
+			//실행
+			int count = pstmt.executeUpdate();
 		    
 		    // 4.결과처리
-		    while(rs.next()) {
-//		    	int authorId = rs.getInt("id");
-//		    	String authorName = rs.getString("author_name");
-//		    	String authorDesc = rs.getString("author_desc");
-		    	
-		    	int authorId = rs.getInt(1);
-		    	String authorName = rs.getString(2);
-		    	String authorDesc = rs.getString(3);
-		    	
-		    	System.out.println(authorId+", "+authorName+", "+authorDesc);
-		    }
+			System.out.println(count+" 건이 저장되었습니다.");
 
 		} catch (ClassNotFoundException e) {
 		    System.out.println("error: 드라이버 로딩 실패 - " + e);
@@ -62,9 +65,9 @@ public class AuthorSelect {
 		   
 		    // 5. 자원정리
 		    try {
-		        if (rs != null) {
-		            rs.close();
-		        }                
+//		        if (rs != null) {
+//		            rs.close();
+//		        }                
 		        if (pstmt != null) {
 		            pstmt.close();
 		        }
@@ -78,8 +81,14 @@ public class AuthorSelect {
 		}
 
 		
-
+		
 	}
 
+	
+	//책 수정
+	
+	//책 삭제
+	
+	//리스트 불러오기
+	
 }
-
