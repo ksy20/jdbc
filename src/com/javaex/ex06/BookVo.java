@@ -1,4 +1,4 @@
-package com.javaex.ex05;
+package com.javaex.ex06;
 //조인된걸로 만들기
 
 public class BookVo {
@@ -14,11 +14,11 @@ public class BookVo {
 	public BookVo() {
 	}
 	
-	public BookVo(String title, String pubs, String pubDate, int authorId) {
+	public BookVo(int bookId, String title, String pubs, String pubDate, int authorId) {
+		this.bookId = bookId;
 		this.title = title;
 		this.pubs = pubs;
 		this.pubDate = pubDate;
-		this.authorId = authorId;
 	}
 
 	public BookVo(int bookId, String title, String pubs, String pubDate, int authorId, String authorName,
